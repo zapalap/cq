@@ -11,6 +11,9 @@ using System.Reflection;
 using System.Web;
 using Ninject.Extensions.Conventions;
 using cq.Features.Review.Queries;
+using cq.Infrastructure.MediatorPipeline;
+using FluentValidation;
+using cq.Infrastructure.CommonHandlers;
 
 namespace cq.App_Start
 {
@@ -20,7 +23,36 @@ namespace cq.App_Start
         {
             kernel.Components.Add<IBindingResolver, ContravariantBindingResolver>();
             kernel.Bind(scan => scan.FromAssemblyContaining<IMediator>().SelectAllClasses().BindDefaultInterface());
-            kernel.Bind(scan => scan.FromAssemblyContaining<ListReviewsQuery>().SelectAllClasses().BindAllInterfaces());
+
+            kernel.Bind(scan => scan
+              .FromAssemblyContaining<ListReviewsQuery>()
+              .SelectAllClasses()
+              .InheritedFrom(typeof(IRequestHandler<,>))
+              .BindAllInterfaces()
+              .Configure(c => c.WhenInjectedExactlyInto(typeof(MediatorPipeline<,>))));
+
+            kernel.Bind(scan => scan
+              .FromAssemblyContaining<ListReviewsQuery>()
+              .SelectAllClasses()
+              .InheritedFrom(typeof(IValidator<>))
+              .BindAllInterfaces().Configure(c => c.WhenInjectedExactlyInto(typeof(ValidatorHandler<>))));
+
+            kernel.Bind(typeof(IRequestHandler<,>)).To(typeof(MediatorPipeline<,>));
+
+            kernel.Bind(
+                 x =>
+                     x.FromAssemblyContaining<ListReviewsQuery>()
+                         .SelectAllClasses()
+                         .InheritedFrom(typeof(IPreRequestHandler<>)).BindAllInterfaces()
+                 );
+
+            kernel.Bind(
+                x =>
+                    x.FromAssemblyContaining<ListReviewsQuery>()
+                        .SelectAllClasses()
+                        .InheritedFrom(typeof(IPostRequestHandler<,>)).BindAllInterfaces()
+                );
+
             kernel.Bind<SingleInstanceFactory>().ToMethod(ctx => t => ctx.Kernel.Get(t));
             kernel.Bind<MultiInstanceFactory>().ToMethod(ctx => t => ctx.Kernel.GetAll(t));
         }

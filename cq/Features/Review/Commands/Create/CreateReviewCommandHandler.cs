@@ -21,16 +21,6 @@ namespace cq.Features.Review.Commands
 
         public ReviewDto Handle(CreateReviewCommand message)
         {
-            if (string.IsNullOrEmpty(message.Name))
-            {
-                throw new ArgumentNullException("message.Name");
-            }
-
-            if (message.ScheduleAt < DateTime.UtcNow)
-            {
-                throw new InvalidOperationException("Cannot schedule in the past");
-            }
-
             var review = new Review
             {
                 Name = message.Name,

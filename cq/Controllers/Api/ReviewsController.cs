@@ -1,5 +1,6 @@
 ﻿using cq.Features.Review.Commands;
 using cq.Features.Review.Queries;
+using cq.Infrastructure.ExceptionFilters;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Http;
 
 namespace cq.Controllers.Api
 {
+    [ValidationExceptionFilter]
     public class ReviewsController : ApiController
     {
         private IMediator Mediator;
