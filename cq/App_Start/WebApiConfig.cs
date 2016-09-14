@@ -7,11 +7,10 @@ namespace cq
 {
     public static class WebApiConfig
     {
-        public static void Register(HttpConfiguration config)
+        public static HttpConfiguration BuildConfig()
         {
-            // Web API configuration and services
+            var config = new HttpConfiguration();
 
-            // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
@@ -19,6 +18,8 @@ namespace cq
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            return config;
         }
     }
 }
