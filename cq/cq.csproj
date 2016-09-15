@@ -260,7 +260,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\CommonHandlers\CommandStoreHandler.cs" />
-    <Compile Include="Infrastructure\CommonHandlers\ConsoleLoggingHandler.cs" />
+    <Compile Include="Infrastructure\CommonHandlers\ResponseLoggingHandler.cs" />
     <Compile Include="Infrastructure\CommonHandlers\ValidatorHandler.cs" />
     <Compile Include="Infrastructure\ExceptionFilters\ValidationExceptionFilter.cs" />
     <Compile Include="Infrastructure\MediatorPipeline\IPostRequestHandler.cs" />
