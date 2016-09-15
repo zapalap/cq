@@ -1,4 +1,5 @@
-﻿using cq.Features.Review;
+﻿using cq.Features.CommandStore;
+using cq.Features.Review;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,5 +17,6 @@ namespace cq.Data
 
         public DbSet<Attendee> Attendees { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<SerializedCommand> Commands { get; set; }
     }
 }

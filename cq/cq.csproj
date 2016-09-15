@@ -236,14 +236,19 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\Api\CommandStoreController.cs" />
     <Compile Include="Controllers\Api\ReviewsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\CqEntities.cs" />
+    <Compile Include="Features\CommandStore\Queries\ListStoredCommandQueryHandler.cs" />
+    <Compile Include="Features\CommandStore\Queries\ListStoredCommandsQuery.cs" />
+    <Compile Include="Features\CommandStore\SerializedCommand.cs" />
     <Compile Include="Features\Review\Attendee.cs" />
     <Compile Include="Features\Review\Commands\Create\CreateReviewCommand.cs" />
     <Compile Include="Features\Review\Commands\Create\CreateReviewCommandHandler.cs" />
     <Compile Include="Features\Review\Commands\Create\CreateReviewCommandValidator.cs" />
+    <Compile Include="Features\Review\Commands\Create\DuplicateNameValidator.cs" />
     <Compile Include="Features\Review\Commands\Update\UpdateReviewCommand.cs" />
     <Compile Include="Features\Review\Commands\Update\UpdateReviewCommandHandler.cs" />
     <Compile Include="Features\Review\Commands\Update\UpdateReviewCommandValidator.cs" />
@@ -254,6 +259,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\CommonHandlers\CommandStoreHandler.cs" />
+    <Compile Include="Infrastructure\CommonHandlers\ConsoleLoggingHandler.cs" />
     <Compile Include="Infrastructure\CommonHandlers\ValidatorHandler.cs" />
     <Compile Include="Infrastructure\ExceptionFilters\ValidationExceptionFilter.cs" />
     <Compile Include="Infrastructure\MediatorPipeline\IPostRequestHandler.cs" />
@@ -262,6 +269,10 @@
     <Compile Include="Migrations\201609132126324_Initial.cs" />
     <Compile Include="Migrations\201609132126324_Initial.Designer.cs">
       <DependentUpon>201609132126324_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609142357427_SerializedCommands.cs" />
+    <Compile Include="Migrations\201609142357427_SerializedCommands.Designer.cs">
+      <DependentUpon>201609142357427_SerializedCommands.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -320,6 +331,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609132126324_Initial.resx">
       <DependentUpon>201609132126324_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609142357427_SerializedCommands.resx">
+      <DependentUpon>201609142357427_SerializedCommands.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

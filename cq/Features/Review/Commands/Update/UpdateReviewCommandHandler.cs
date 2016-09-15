@@ -22,11 +22,6 @@ namespace cq.Features.Review.Commands
 
         public ReviewDto Handle(UpdateReviewCommand message)
         {
-            if (message.ScheduleAt > DateTime.UtcNow)
-            {
-                throw new InvalidOperationException("Cannot schedule in the future");
-            }
-
             var review = Db.Reviews.FirstOrDefault(r => r.Id == message.Id);
 
             if (review == null)
