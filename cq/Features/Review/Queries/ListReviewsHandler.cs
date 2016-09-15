@@ -22,10 +22,14 @@ namespace cq.Features.Review.Queries
 
         public IEnumerable<ReviewDto> Handle(ListReviewsQuery message)
         {
-            var dtos = Db
-                .Reviews
-                .ProjectTo<ReviewDto>(MapperConfig)
-                .ToList();
+            var reviews = Db.Reviews.AsQueryable();
+
+            if (!string.IsNullOrEmpty(message.NameFilter))
+            {
+                reviews = Db.Reviews.Where(d => d.Name.Contains(message.NameFilter));
+            };
+
+            var dtos = reviews.ProjectTo<ReviewDto>(MapperConfig);
 
             return dtos;
         }

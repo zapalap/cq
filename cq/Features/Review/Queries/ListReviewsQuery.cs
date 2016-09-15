@@ -8,6 +8,6 @@ namespace cq.Features.Review.Queries
 {
     public class ListReviewsQuery : IRequest<IEnumerable<ReviewDto>>
     {
-        public string Name { get; set; }
+        public string NameFilter { get; set; }
     }
 }
