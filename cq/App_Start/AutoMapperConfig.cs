@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using cq.Features.Review;
-using Ninject;
+using SimpleInjector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +10,13 @@ namespace cq.App_Start
 {
     public static class AutoMapperConfig
     {
-        public static void BuildMapper(IKernel kernel)
+        public static void BuildMapper(Container container)
         {
             var config = new MapperConfiguration(CreateMapper);
             var mapper = config.CreateMapper();
 
-            kernel.Bind<IMapper>().ToConstant(mapper);
-            kernel.Bind<IConfigurationProvider>().ToConstant(config);
+            container.RegisterSingleton<IMapper>(mapper);
+            container.RegisterSingleton<IConfigurationProvider>(config);
         }
 
         private static void CreateMapper(IMapperConfigurationExpression config)

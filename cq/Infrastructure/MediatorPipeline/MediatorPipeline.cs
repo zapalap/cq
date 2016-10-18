@@ -10,10 +10,10 @@ namespace cq.Infrastructure.MediatorPipeline
     {
 
         private readonly IRequestHandler<TRequest, TResponse> Inner;
-        private readonly IPreRequestHandler<TRequest>[] PreRequestHandlers;
-        private readonly IPostRequestHandler<TRequest, TResponse>[] PostRequestHandlers;
+        private readonly IEnumerable<IPreRequestHandler<TRequest>> PreRequestHandlers;
+        private readonly IEnumerable<IPostRequestHandler<TRequest, TResponse>> PostRequestHandlers;
 
-        public MediatorPipeline(IRequestHandler<TRequest, TResponse> inner, IPreRequestHandler<TRequest>[] preRequestHandlers, IPostRequestHandler<TRequest, TResponse>[] postRequestHandlers)
+        public MediatorPipeline(IRequestHandler<TRequest, TResponse> inner, IEnumerable<IPreRequestHandler<TRequest>> preRequestHandlers, IEnumerable<IPostRequestHandler<TRequest, TResponse>> postRequestHandlers)
         {
             Inner = inner;
             PreRequestHandlers = preRequestHandlers;
