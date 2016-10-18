@@ -235,6 +235,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\CommonHandlers\CommandStoreHandler.cs" />
+    <Compile Include="Infrastructure\CommonHandlers\ICommand.cs" />
+    <Compile Include="Infrastructure\CommonHandlers\IQuery.cs" />
+    <Compile Include="Infrastructure\CommonHandlers\CommandLoggingHandler.cs" />
+    <Compile Include="Infrastructure\CommonHandlers\QueryLoggingHandler.cs" />
     <Compile Include="Infrastructure\CommonHandlers\ResponseLoggingHandler.cs" />
     <Compile Include="Infrastructure\CommonHandlers\ValidatorHandler.cs" />
     <Compile Include="Infrastructure\ExceptionFilters\ValidationExceptionFilter.cs" />
