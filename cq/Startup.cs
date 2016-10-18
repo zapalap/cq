@@ -2,10 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
-using Ninject.Web.Common.OwinHost;
-using Ninject;
 using System.Reflection;
-using Ninject.Web.WebApi.OwinHost;
+using cq.App_Start;
+using SimpleInjector.Integration.WebApi;
 
 [assembly: OwinStartup(typeof(cq.Startup))]
 
@@ -15,22 +14,11 @@ namespace cq
     {
         public void Configuration(IAppBuilder app)
         {
-            var kernel = CreateKernel();
-
+            var container = ServicesConfig.BuildContainer();
             var apiConfig = WebApiConfig.BuildConfig();
 
-            app
-                .UseNinjectMiddleware(() => kernel)
-                .UseNinjectWebApi(apiConfig);
-        }
-
-        private static StandardKernel CreateKernel()
-        {
-            var kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
-            return kernel;
+            apiConfig.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
+            app.UseWebApi(apiConfig);
         }
     }
-
-
 }
